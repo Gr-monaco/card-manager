@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { dndzone, type DndEvent } from 'svelte-dnd-action';
+
 	import type { CardData } from '$lib/types/cardData';
 	import type { ColumnInfo } from '$lib/types/columnInfo';
 
@@ -7,6 +9,11 @@
 	}
 
 	let { columnInfo }: Props = $props();
+
+	function handleDrop(e: CustomEvent<DndEvent<CardData>>) {
+		columnInfo.cards = e.detail.items;
+	}
+
 </script>
 
 <div class="column">
@@ -14,8 +21,12 @@
 		<span class="col-title">{columnInfo.title}</span>
 		<span class="col-count">{columnInfo.cards.length}</span>
 	</div>
-	<div class="cards-container" data-column-id={columnInfo.id}>
-		{#each columnInfo.cards as cardInfo}
+	<div class="cards-container" 
+    use:dndzone={{items: columnInfo.cards, flipDurationMs: 300, type: 'columns'}}
+    onconsider={handleDrop}
+    onfinalize={handleDrop}
+    data-column-id={columnInfo.id}>
+		{#each columnInfo.cards as cardInfo (cardInfo.id)}
 			{@render card(cardInfo)}
 		{/each}
 	</div>
@@ -53,6 +64,7 @@
 		align-items: center;
 		margin-bottom: 0.5rem;
 	}
+    
 	.col-title {
 		font-size: 0.85rem;
 		font-weight: 700;
@@ -60,6 +72,7 @@
 		letter-spacing: 0.05em;
 		color: var(--text-muted);
 	}
+
 	.col-count {
 		background: #f1f5f9;
 		font-size: 0.7rem;

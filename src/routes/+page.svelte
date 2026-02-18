@@ -1,9 +1,8 @@
 <script lang="ts">
 	import Column from '$lib/components/Column.svelte';
-	import type { CardData } from '$lib/types/cardData';
 	import type { ColumnInfo } from '$lib/types/columnInfo';
 
-	const columns: ColumnInfo[] = [
+	let columns = $state<ColumnInfo[]>([
 		{
 			id: 'backlog',
 			title: 'Backlog',
@@ -30,16 +29,12 @@
 			title: 'Concluído',
 			cards: [{ id: 'c6', text: 'Definição das cores do tema', tag: 'Design' }]
 		}
-	];
+	]);
 </script>
 
-
-
-
-
 <div class="board">
-	{#each columns as columnInfo}
-		<Column {columnInfo}/>
+	{#each columns as columnInfo (columnInfo.id)}
+		<Column {columnInfo}></Column>
 	{/each}
 </div>
 
