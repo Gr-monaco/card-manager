@@ -8,7 +8,7 @@
 		columnInfo: ColumnInfo;
 	}
 
-	let { columnInfo }: Props = $props();
+	let { columnInfo  = $bindable()}: Props = $props();
 
 	function handleDrop(e: CustomEvent<DndEvent<CardData>>) {
 		columnInfo.cards = e.detail.items;
@@ -64,7 +64,7 @@
 		align-items: center;
 		margin-bottom: 0.5rem;
 	}
-    
+
 	.col-title {
 		font-size: 0.85rem;
 		font-weight: 700;

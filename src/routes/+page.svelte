@@ -33,8 +33,8 @@
 </script>
 
 <div class="board">
-	{#each columns as columnInfo (columnInfo.id)}
-		<Column {columnInfo}></Column>
+	{#each columns as columnInfo, i (columnInfo.id)}
+		<Column bind:columnInfo={columns[i]}></Column>
 	{/each}
 </div>
 
