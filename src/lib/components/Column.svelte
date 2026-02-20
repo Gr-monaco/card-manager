@@ -8,12 +8,11 @@
 		columnInfo: ColumnInfo;
 	}
 
-	let { columnInfo  = $bindable()}: Props = $props();
+	let { columnInfo = $bindable() }: Props = $props();
 
 	function handleDrop(e: CustomEvent<DndEvent<CardData>>) {
 		columnInfo.cards = e.detail.items;
 	}
-
 </script>
 
 <div class="column">
@@ -21,11 +20,13 @@
 		<span class="col-title">{columnInfo.title}</span>
 		<span class="col-count">{columnInfo.cards.length}</span>
 	</div>
-	<div class="cards-container" 
-    use:dndzone={{items: columnInfo.cards, flipDurationMs: 300, type: 'columns'}}
-    onconsider={handleDrop}
-    onfinalize={handleDrop}
-    data-column-id={columnInfo.id}>
+	<div
+		class="cards-container"
+		use:dndzone={{ items: columnInfo.cards, flipDurationMs: 300, type: 'columns' }}
+		onconsider={handleDrop}
+		onfinalize={handleDrop}
+		data-column-id={columnInfo.id}
+	>
 		{#each columnInfo.cards as cardInfo (cardInfo.id)}
 			{@render card(cardInfo)}
 		{/each}
@@ -34,12 +35,14 @@
 
 {#snippet card(cardInfo: CardData)}
 	<div class="card" data-card-id={cardInfo.id}>
-		<div class="card-title">
-			{cardInfo.text}
-		</div>
-		<div class="card-meta">
-			<span class="tag">{cardInfo.tag}</span>
-		</div>
+		<textarea class="card-input-title" bind:value={cardInfo.text}></textarea>
+		<select class="card-tag-select" bind:value={cardInfo.tag}>
+			<option value="Feature" selected={cardInfo.tag === 'Feature'}>Feature</option>
+			<option value="Bug" selected={cardInfo.tag === 'Bug'}>Bug</option>
+			<option value="Design" selected={cardInfo.tag === 'Design'}>Design</option>
+			<option value="Pesquisa" selected={cardInfo.tag === 'Pesquisa'}>Research</option>
+			<option value="Setup" selected={cardInfo.tag === 'Setup'}>Setup</option>
+		</select>
 	</div>
 {/snippet}
 
@@ -115,29 +118,41 @@
 		opacity: 0;
 		transition: opacity 0.2s;
 	}
+
 	.card:hover::after {
 		opacity: 1;
 	}
 
-	.card-title {
+	.card-input-title {
+		width: 100%;
+		border: 1px solid transparent;
+		background: transparent;
+		font-family: inherit;
 		font-size: 0.95rem;
 		font-weight: 500;
+		color: var(--text-main);
 		line-height: 1.4;
-	}
-	.card-meta {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		margin-top: 1rem;
+		padding: 4px;
+		margin: -4px -4px 0 -4px; /* Compensação para não pular o layout */
+		border-radius: 4px;
+		resize: none; /* Textarea */
+		overflow: hidden;
+		transition: border-color 0.2s;
 	}
 
-	.tag {
+	.card-tag-select {
+		align-self: flex-start;
+		border: none;
 		background: #eff6ff;
 		color: var(--primary);
 		padding: 4px 8px;
+		margin: 4px 0;
 		border-radius: 4px;
 		font-weight: 600;
 		font-size: 0.65rem;
 		text-transform: uppercase;
+		cursor: pointer;
+		font-family: inherit;
+		transition: transform 0.1s;
 	}
 </style>
