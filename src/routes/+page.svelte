@@ -1,40 +1,13 @@
 <script lang="ts">
 	import Column from '$lib/components/Column.svelte';
-	import type { ColumnInfo } from '$lib/types/columnInfo';
+	import { columnStore } from '$lib/stores/columnStore.svelte';
 
-	let columns = $state<ColumnInfo[]>([
-		{
-			id: 'backlog',
-			title: 'Backlog',
-			cards: [
-				{ id: 'c1', text: 'Estudar documentação do Svelte', tag: 'Pesquisa' },
-				{ id: 'c2', text: 'Configurar ambiente Tauri', tag: 'Setup' }
-			]
-		},
-		{
-			id: 'progress',
-			title: 'Em Progresso',
-			cards: [
-				{ id: 'c3', text: 'Criar componentes reutilizáveis', tag: 'Feature' },
-				{ id: 'c4', text: 'Bug no scroll da sidebar', tag: 'Bug' }
-			]
-		},
-		{
-			id: 'review',
-			title: 'Em Revisão',
-			cards: [{ id: 'c5', text: 'Integração com API', tag: 'Feature' }]
-		},
-		{
-			id: 'done',
-			title: 'Concluído',
-			cards: [{ id: 'c6', text: 'Definição das cores do tema', tag: 'Design' }]
-		}
-	]);
+
 </script>
 
 <div class="board">
-	{#each columns as columnInfo, i (columnInfo.id)}
-		<Column bind:columnInfo={columns[i]}></Column>
+	{#each columnStore.data.columns as columnInfo, i (columnInfo.id)}
+		<Column bind:columnInfo={columnStore.data.columns [i]}></Column>
 	{/each}
 </div>
 

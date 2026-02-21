@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { columnStore } from '$lib/stores/columnStore.svelte'
 	import { dndzone, type DndEvent } from 'svelte-dnd-action';
 
 	import type { CardData } from '$lib/types/cardData';
@@ -11,8 +12,9 @@
 	let { columnInfo = $bindable() }: Props = $props();
 
 	function handleDrop(e: CustomEvent<DndEvent<CardData>>) {
-		columnInfo.cards = e.detail.items;
+		columnStore.handleDropCard(columnInfo.id, e.detail.items);
 	}
+
 </script>
 
 <div class="column">
@@ -31,12 +33,13 @@
 			{@render card(cardInfo)}
 		{/each}
 	</div>
+	<button class="btn-add-card" onclick={() => columnStore.addCard(columnInfo.id)}>+ Adicionar Tarefa</button>
 </div>
 
 {#snippet card(cardInfo: CardData)}
 	<div class="card" data-card-id={cardInfo.id}>
-		<textarea class="card-input-title" bind:value={cardInfo.text}></textarea>
-		<select class="card-tag-select" bind:value={cardInfo.tag}>
+		<textarea class="card-input-title" bind:value={cardInfo.title} onchange={() => columnStore.save()}></textarea>
+		<select class="card-tag-select" bind:value={cardInfo.tag} onchange={() => columnStore.save()}>
 			<option value="Feature" selected={cardInfo.tag === 'Feature'}>Feature</option>
 			<option value="Bug" selected={cardInfo.tag === 'Bug'}>Bug</option>
 			<option value="Design" selected={cardInfo.tag === 'Design'}>Design</option>
@@ -154,5 +157,23 @@
 		cursor: pointer;
 		font-family: inherit;
 		transition: transform 0.1s;
+	}
+
+	.btn-add-card {
+		width: 100%;
+		background: transparent;
+		border: 2px dashed var(--border-color);
+		padding: 0.75rem;
+		border-radius: 8px;
+		color: var(--text-muted);
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.2s;
+		margin-top: 0.5rem;
+	}
+	.btn-add-card:hover {
+		border-color: var(--primary);
+		color: var(--primary);
+		background: #f8fafc;
 	}
 </style>

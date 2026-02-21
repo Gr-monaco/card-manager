@@ -1,7 +1,7 @@
 import type { CardData } from "./cardData";
 
 export interface ColumnInfo {
-	id: string;
+	id: number;
 	title: string;
 	cards: CardData[];
 }

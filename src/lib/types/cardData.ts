@@ -1,5 +1,5 @@
 export interface CardData {
-	id: string;
-	text: string;
+	id: number;
+	title: string;
 	tag: string;
 }
