@@ -92,6 +92,19 @@ function handleDropCard(newColumnId: number, cards: CardData[]) {
 	saveToStorage(data);
 }
 
+function handleDeleteCard(columnId: number, cardId: number) {
+	const targetColumn = data.columns.find((c) => c.id === columnId);
+
+	if (!targetColumn) {
+		console.error('Invalid column.');
+		return;
+	}
+
+	targetColumn.cards = targetColumn.cards.filter((c) => c.id !== cardId);
+
+	saveToStorage(data);
+}
+
 export const columnStore = {
 	get data() {
 		return data;
@@ -100,4 +113,5 @@ export const columnStore = {
 	addCard,
 	handleDropCard,
 	save: () => saveToStorage(data),
+	handleDeleteCard
 };

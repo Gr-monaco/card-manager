@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { columnStore } from '$lib/stores/columnStore.svelte'
+	import { columnStore } from '$lib/stores/columnStore.svelte';
 	import { dndzone, type DndEvent } from 'svelte-dnd-action';
 
 	import type { CardData } from '$lib/types/cardData';
@@ -14,7 +14,6 @@
 	function handleDrop(e: CustomEvent<DndEvent<CardData>>) {
 		columnStore.handleDropCard(columnInfo.id, e.detail.items);
 	}
-
 </script>
 
 <div class="column">
@@ -33,12 +32,30 @@
 			{@render card(cardInfo)}
 		{/each}
 	</div>
-	<button class="btn-add-card" onclick={() => columnStore.addCard(columnInfo.id)}>+ Adicionar Tarefa</button>
+	<button class="btn-add-card" onclick={() => columnStore.addCard(columnInfo.id)}
+		>+ Adicionar Tarefa</button
+	>
 </div>
 
 {#snippet card(cardInfo: CardData)}
 	<div class="card" data-card-id={cardInfo.id}>
-		<textarea class="card-input-title" bind:value={cardInfo.title} onchange={() => columnStore.save()}></textarea>
+		<button class="btn-delete-card" onclick={()=>columnStore.handleDeleteCard(columnInfo.id, cardInfo.id)} title="Excluir tarefa">
+			<svg
+				width="14"
+				height="14"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				viewBox="0 0 24 24"
+			>
+				<path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" />
+			</svg>
+		</button>
+		<textarea
+			class="card-input-title"
+			bind:value={cardInfo.title}
+			onchange={() => columnStore.save()}
+		></textarea>
 		<select class="card-tag-select" bind:value={cardInfo.tag} onchange={() => columnStore.save()}>
 			<option value="Feature" selected={cardInfo.tag === 'Feature'}>Feature</option>
 			<option value="Bug" selected={cardInfo.tag === 'Bug'}>Bug</option>
@@ -175,5 +192,34 @@
 		border-color: var(--primary);
 		color: var(--primary);
 		background: #f8fafc;
+	}
+
+	.btn-delete-card {
+		position: absolute;
+		top: 4px;
+		right: 4px;
+		width: 24px;
+		height: 24px;
+		border-radius: 6px;
+		border: none;
+		background: transparent;
+		color: var(--text-muted);
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0; /* ESCONDIDO POR PADRÃO */
+		transition: all 0.2s ease;
+		transform: scale(0.8);
+	}
+
+	.card:hover .btn-delete-card {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	.btn-delete-card:hover {
+		background-color: var(--danger);
+		color: white;
 	}
 </style>
