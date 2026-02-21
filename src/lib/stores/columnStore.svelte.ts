@@ -115,3 +115,6 @@ export const columnStore = {
 	save: () => saveToStorage(data),
 	handleDeleteCard
 };
+
+//TODOS: Refactor find column, there is too much repetition
+//       Make a better way to make an ID for the card
