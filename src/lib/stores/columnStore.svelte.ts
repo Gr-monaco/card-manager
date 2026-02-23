@@ -5,6 +5,7 @@ const STORAGE_KEY = 'card_manager_data';
 
 interface ColumnStoreState {
 	columns: ColumnInfo[];
+	lastCardId: number;
 }
 
 const data = $state<ColumnStoreState>(getInitialState());
@@ -18,12 +19,12 @@ function getInitialState(): ColumnStoreState {
 				return JSON.parse(stored) as ColumnStoreState;
 			} catch (e) {
 				console.error('Error reading localStorage', e);
-				return { columns: [] };
+				return { columns: [], lastCardId: 6 };
 			}
 		}
 	}
 
-	const defaultColumnData = [
+	const defaultColumnsData = [
 		{
 			id: 1,
 			title: 'Backlog',
@@ -52,7 +53,7 @@ function getInitialState(): ColumnStoreState {
 		}
 	];
 
-	return { columns: defaultColumnData };
+	return { columns: defaultColumnsData, lastCardId: 6 };
 }
 
 function saveToStorage(state: ColumnStoreState) {
@@ -66,7 +67,7 @@ function addCard(columnId: number): void {
 
 	const newCardData: CardData = {} as CardData;
 
-	newCardData.id = Math.random();
+	newCardData.id = ++data.lastCardId;
 	newCardData.title = 'title';
 	newCardData.tag = 'Feature';
 
@@ -111,5 +112,3 @@ export const columnStore = {
 	save: () => saveToStorage(data),
 	handleDeleteCard
 };
-
-//TODOS:      Make a better way to make an ID for the card
