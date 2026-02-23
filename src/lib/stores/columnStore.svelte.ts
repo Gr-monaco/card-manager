@@ -62,12 +62,7 @@ function saveToStorage(state: ColumnStoreState) {
 }
 
 function addCard(columnId: number): void {
-	const targetColumn = data.columns.find((c) => c.id === columnId);
-
-	if (!targetColumn) {
-		console.error('Invalid column.');
-		return;
-	}
+	const targetColumn = findColumn(columnId);
 
 	const newCardData: CardData = {} as CardData;
 
@@ -81,28 +76,29 @@ function addCard(columnId: number): void {
 }
 
 function handleDropCard(newColumnId: number, cards: CardData[]) {
-	const targetColumn = data.columns.find((c) => c.id === newColumnId);
+	const targetColumn = findColumn(newColumnId);
 
-	if (!targetColumn) {
-		console.error('Invalid column.');
-		return;
-	}
 	targetColumn.cards = cards;
 
 	saveToStorage(data);
 }
 
 function handleDeleteCard(columnId: number, cardId: number) {
-	const targetColumn = data.columns.find((c) => c.id === columnId);
-
-	if (!targetColumn) {
-		console.error('Invalid column.');
-		return;
-	}
+	const targetColumn = findColumn(columnId);
 
 	targetColumn.cards = targetColumn.cards.filter((c) => c.id !== cardId);
 
 	saveToStorage(data);
+}
+
+function findColumn(columnId: number): ColumnInfo {
+	const targetColumn = data.columns.find((c) => c.id === columnId);
+
+	if (!targetColumn) {
+		throw new Error("Invalid column: The provided ID doesn't match any columns ids.");
+	}
+
+	return targetColumn;
 }
 
 export const columnStore = {
@@ -116,5 +112,4 @@ export const columnStore = {
 	handleDeleteCard
 };
 
-//TODOS: Refactor find column, there is too much repetition
-//       Make a better way to make an ID for the card
+//TODOS:      Make a better way to make an ID for the card
