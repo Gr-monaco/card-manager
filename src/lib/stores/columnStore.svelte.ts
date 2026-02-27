@@ -6,11 +6,48 @@ const STORAGE_KEY = 'card_manager_data';
 interface ColumnStoreState {
 	columns: ColumnInfo[];
 	lastCardId: number;
+	isLoading: boolean;
 }
 
-const data = $state<ColumnStoreState>(getInitialState());
+let data = $state<ColumnStoreState>({
+	columns: [],
+	lastCardId: 0,
+	isLoading: true
+});
 
-function getInitialState(): ColumnStoreState {
+const defaultColumnsData = [
+	{
+		id: 1,
+		title: 'Backlog',
+		cards: [
+			{ id: 1, title: 'Estudar documentação do Svelte', tag: 'Pesquisa' },
+			{ id: 2, title: 'Configurar ambiente Tauri', tag: 'Setup' }
+		]
+	},
+	{
+		id: 2,
+		title: 'Em Progresso',
+		cards: [
+			{ id: 3, title: 'Criar componentes reutilizáveis', tag: 'Feature' },
+			{ id: 4, title: 'Bug no scroll da sidebar', tag: 'Bug' }
+		]
+	},
+	{
+		id: 3,
+		title: 'Em Revisão',
+		cards: [{ id: 5, title: 'Integração com API', tag: 'Feature' }]
+	},
+	{
+		id: 4,
+		title: 'Concluído',
+		cards: [{ id: 6, title: 'Definição das cores do tema', tag: 'Design' }]
+	}
+];
+
+async function getData(): Promise<ColumnStoreState> {
+	//Fake timeout just to not flash a loading state
+	await new Promise((resolve) => setTimeout(resolve, 600));
+
 	if (typeof window !== 'undefined') {
 		const stored = localStorage.getItem(STORAGE_KEY);
 
@@ -19,41 +56,22 @@ function getInitialState(): ColumnStoreState {
 				return JSON.parse(stored) as ColumnStoreState;
 			} catch (e) {
 				console.error('Error reading localStorage', e);
-				return { columns: [], lastCardId: 6 };
+				return { columns: defaultColumnsData, lastCardId: 6, isLoading: false };
 			}
 		}
 	}
 
-	const defaultColumnsData = [
-		{
-			id: 1,
-			title: 'Backlog',
-			cards: [
-				{ id: 1, title: 'Estudar documentação do Svelte', tag: 'Pesquisa' },
-				{ id: 2, title: 'Configurar ambiente Tauri', tag: 'Setup' }
-			]
-		},
-		{
-			id: 2,
-			title: 'Em Progresso',
-			cards: [
-				{ id: 3, title: 'Criar componentes reutilizáveis', tag: 'Feature' },
-				{ id: 4, title: 'Bug no scroll da sidebar', tag: 'Bug' }
-			]
-		},
-		{
-			id: 3,
-			title: 'Em Revisão',
-			cards: [{ id: 5, title: 'Integração com API', tag: 'Feature' }]
-		},
-		{
-			id: 4,
-			title: 'Concluído',
-			cards: [{ id: 6, title: 'Definição das cores do tema', tag: 'Design' }]
-		}
-	];
+	return { columns: [], lastCardId: 0, isLoading: true };
+}
 
-	return { columns: defaultColumnsData, lastCardId: 6 };
+async function initializeStore() {
+	data.isLoading = true;
+
+	try {
+		data = await getData();
+	} finally {
+		data.isLoading = false;
+	}
 }
 
 function saveToStorage(state: ColumnStoreState) {
@@ -107,6 +125,7 @@ export const columnStore = {
 		return data;
 	},
 
+	initializeStore,
 	addCard,
 	handleDropCard,
 	save: () => saveToStorage(data),
