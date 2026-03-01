@@ -1,5 +1,7 @@
 <script>
 	import '../../app.css';
+	import LanguageDropDown from './LanguageDropDown.svelte';
+	import { _ } from 'svelte-i18n';
 </script>
 
 <header>
@@ -18,7 +20,8 @@
 	</div>
 
 	<nav>
-		<a href="/about">Sobre</a>
+		<LanguageDropDown />
+		<a href="/about">{$_('header.about')}</a>
 	</nav>
 </header>
 
