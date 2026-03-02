@@ -1,0 +1,20 @@
+{
+	"header": {
+		"about": "Sobre"
+	},
+	"column": {
+		"backlog": "Backlog",
+		"inProgress": "Em Progresso",
+		"inRevision": "Em Revisão",
+		"concluded": "Concluído",
+		"addTask": "Adicionar Tarefa"
+	},
+	"card": {
+		"feature": "Feature",
+		"bug": "Bug",
+		"design": "Design",
+		"research": "Pesquisa",
+		"setup": "Setup",
+		"deleteTask": "Excluir Tarefa"
+	}
+}

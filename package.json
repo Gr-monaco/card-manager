@@ -33,6 +33,7 @@
 		"vite": "^7.3.1"
 	},
 	"dependencies": {
-		"svelte-dnd-action": "^0.9.69"
+		"svelte-dnd-action": "^0.9.69",
+		"svelte-i18n": "^4.0.1"
 	}
 }

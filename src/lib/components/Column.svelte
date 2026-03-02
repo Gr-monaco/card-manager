@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { columnStore } from '$lib/stores/columnStore.svelte';
 	import { dndzone, type DndEvent } from 'svelte-dnd-action';
+	import { _ } from 'svelte-i18n';
 
 	import type { CardData } from '$lib/types/cardData';
 	import type { ColumnInfo } from '$lib/types/columnInfo';
@@ -18,7 +19,7 @@
 
 <div class="column">
 	<div class="column-header">
-		<span class="col-title">{columnInfo.title}</span>
+		<span class="col-title">{$_(columnInfo.title)}</span>
 		<span class="col-count">{columnInfo.cards.length}</span>
 	</div>
 	<div
@@ -33,13 +34,17 @@
 		{/each}
 	</div>
 	<button class="btn-add-card" onclick={() => columnStore.addCard(columnInfo.id)}
-		>+ Adicionar Tarefa</button
-	>
+		><span>+</span> {$_('column.addTask')}
+	</button>
 </div>
 
 {#snippet card(cardInfo: CardData)}
 	<div class="card" data-card-id={cardInfo.id}>
-		<button class="btn-delete-card" onclick={()=>columnStore.handleDeleteCard(columnInfo.id, cardInfo.id)} title="Excluir tarefa">
+		<button
+			class="btn-delete-card"
+			onclick={() => columnStore.handleDeleteCard(columnInfo.id, cardInfo.id)}
+			title={$_('card.deleteTask')}
+		>
 			<svg
 				width="14"
 				height="14"
@@ -57,11 +62,11 @@
 			onchange={() => columnStore.save()}
 		></textarea>
 		<select class="card-tag-select" bind:value={cardInfo.tag} onchange={() => columnStore.save()}>
-			<option value="Feature" selected={cardInfo.tag === 'Feature'}>Feature</option>
-			<option value="Bug" selected={cardInfo.tag === 'Bug'}>Bug</option>
-			<option value="Design" selected={cardInfo.tag === 'Design'}>Design</option>
-			<option value="Pesquisa" selected={cardInfo.tag === 'Pesquisa'}>Research</option>
-			<option value="Setup" selected={cardInfo.tag === 'Setup'}>Setup</option>
+			<option value="feature">{$_('card.feature')}</option>
+			<option value="bug">{$_('card.bug')}</option>
+			<option value="design">{$_('card.design')}</option>
+			<option value="research">{$_('card.research')}</option>
+			<option value="setup">{$_('card.setup')}</option>
 		</select>
 	</div>
 {/snippet}
