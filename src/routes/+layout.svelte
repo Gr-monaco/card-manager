@@ -4,7 +4,7 @@
 	import Header from '$lib/components/Header.svelte';
 	import { columnStore } from '$lib/stores/columnStore.svelte';
 	import { onMount } from 'svelte';
-	import { getLocaleFromNavigator, init, register, waitLocale } from 'svelte-i18n';
+	import { init, register, waitLocale } from 'svelte-i18n';
 
 	let { children } = $props();
 
@@ -22,8 +22,6 @@
 			if (savedLang) {
 				return savedLang;
 			}
-
-			return getLocaleFromNavigator();
 		}
 
 		return 'en-US';

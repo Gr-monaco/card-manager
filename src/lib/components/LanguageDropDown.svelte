@@ -157,7 +157,6 @@
 		background: none;
 		border: none;
 		font-family: inherit; /* Ensures font matches the rest of the page */
-		font-size: inherit;
 		text-align: inherit;
 		cursor: pointer;
 
@@ -168,7 +167,6 @@
 		text-decoration: none;
 		color: var(--text-main);
 		font-size: 0.9rem;
-		cursor: pointer;
 		transition: background 0.1s;
 		width: 100%;
 	}

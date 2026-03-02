@@ -18,29 +18,29 @@ let data = $state<ColumnStoreState>({
 const defaultColumnsData = [
 	{
 		id: 1,
-		title: 'Backlog',
+		title: 'column.backlog',
 		cards: [
-			{ id: 1, title: 'Estudar documentação do Svelte', tag: 'Pesquisa' },
-			{ id: 2, title: 'Configurar ambiente Tauri', tag: 'Setup' }
+			{ id: 1, title: 'Study Svelte Documentation', tag: 'research' },
+			{ id: 2, title: 'Configure Tauri Environment', tag: 'setup' }
 		]
 	},
 	{
 		id: 2,
-		title: 'Em Progresso',
+		title: 'column.inProgress',
 		cards: [
-			{ id: 3, title: 'Criar componentes reutilizáveis', tag: 'Feature' },
-			{ id: 4, title: 'Bug no scroll da sidebar', tag: 'Bug' }
+			{ id: 3, title: 'Create reusable Components', tag: 'feature' },
+			{ id: 4, title: 'Bug in Scrollbar Component', tag: 'bug' }
 		]
 	},
 	{
 		id: 3,
-		title: 'Em Revisão',
-		cards: [{ id: 5, title: 'Integração com API', tag: 'Feature' }]
+		title: 'column.inRevision',
+		cards: [{ id: 5, title: 'Integration with API', tag: 'feature' }]
 	},
 	{
 		id: 4,
-		title: 'Concluído',
-		cards: [{ id: 6, title: 'Definição das cores do tema', tag: 'Design' }]
+		title: 'column.concluded',
+		cards: [{ id: 6, title: 'Theme Colors Definition', tag: 'design' }]
 	}
 ];
 
@@ -87,7 +87,7 @@ function addCard(columnId: number): void {
 
 	newCardData.id = ++data.lastCardId;
 	newCardData.title = 'title';
-	newCardData.tag = 'Feature';
+	newCardData.tag = 'feature';
 
 	targetColumn.cards.push(newCardData);
 
