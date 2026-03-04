@@ -1,6 +1,8 @@
 {
 	"header": {
-		"about": "Sobre"
+		"about": "Sobre",
+		"hamburguerMenuLabel": "Abrir menu",
+		"overlayLabel": "Fechar menu"
 	},
 	"column": {
 		"backlog": "Backlog",
@@ -15,6 +17,10 @@
 		"design": "Design",
 		"research": "Pesquisa",
 		"setup": "Setup",
-		"deleteTask": "Excluir Tarefa"
+		"deleteTask": "Excluir Tarefa",
+		"newTaskTitle": "Nova Tarefa"
+	},
+	"languageDropDown": {
+		"select": "Selecionar"
 	}
 }

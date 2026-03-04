@@ -27,4 +27,9 @@ body {
 	--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 	--radius: 12px;
 	--danger: #ef4444;
+	--z-overlay: 999;
+	--z-nav-mobile: 1000;
+	--z-hamburger: 1001;
+	--z-dropdown: 2000;
+	--z-header: 10;
 }

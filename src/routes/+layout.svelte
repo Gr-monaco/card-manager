@@ -38,8 +38,32 @@
 </svelte:head>
 
 {#await waitLocale()}
-	<div></div>
+	<div class="loading">
+		<span class="loading-spinner"></span>
+	</div>
 {:then}
 	<Header />
 	{@render children()}
 {/await}
+
+<style>
+	.loading {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-height: 100vh;
+	}
+	
+	.loading-spinner {
+		width: 40px;
+		height: 40px;
+		border: 4px solid var(--border-color);
+		border-top-color: var(--primary);
+		border-radius: 50%;
+		animation: spin 0.8s linear infinite;
+	}
+	
+	@keyframes spin {
+		to { transform: rotate(360deg); }
+	}
+</style>

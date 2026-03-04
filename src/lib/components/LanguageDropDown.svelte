@@ -1,10 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { onDestroy, onMount } from 'svelte';
-	import { locale } from 'svelte-i18n';
-
-	$: currentLanguage = supportedLanguages.find(l => l.languageIdentifier === $locale);
-	$: currentFlag = currentLanguage?.languageFlag || '🇺🇸';
+	import { _, locale } from 'svelte-i18n';
 
 	interface Language {
 		languageIdentifier: string;
@@ -28,17 +25,20 @@
 		}
 	];
 
-	let isDropDownOpen = false;
+	let currentLanguage = $derived(supportedLanguages.find((l) => l.languageIdentifier === $locale));
+	let currentFlag = $derived(currentLanguage?.languageFlag || '🇺🇸');
+
+	let isDropDownOpen = $state(false);
+
+	let dropdownElement: HTMLDivElement;
 
 	function toggleDropdown(): void {
 		isDropDownOpen = !isDropDownOpen;
 	}
 
 	function handleOutsideClick(event: MouseEvent) {
-		if (browser && isDropDownOpen) {
-			const dropdownElement = document.querySelector('.dropdown');
-
-			if (dropdownElement && !dropdownElement.contains(event.target as Node)) {
+		if (browser && isDropDownOpen && dropdownElement) {
+			if (!dropdownElement.contains(event.target as Node)) {
 				isDropDownOpen = false;
 			}
 		}
@@ -67,11 +67,20 @@
 	}
 </script>
 
-<div class="dropdown" class:open={isDropDownOpen}>
+<div class="dropdown" class:open={isDropDownOpen} bind:this={dropdownElement}>
 	<button class="btn-lang" onclick={toggleDropdown}>
 		<span>{currentFlag}</span>
 		<span>{currentLanguage?.languageShortHand}</span>
-		<i class="arrow-down"></i>
+		<svg class="arrow-down" width="12" height="12" viewBox="0 0 12 12">
+			<path
+				d="M2 4l4 4 4-4"
+				stroke-width="2"
+				stroke="currentColor"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			/>
+		</svg>
 	</button>
 
 	<div class="dropdown-menu">
@@ -79,6 +88,7 @@
 			<button
 				class="dropdown-item"
 				class:active={currentLanguage?.languageIdentifier === language.languageIdentifier}
+				aria-label={`${$_('languageDropDown.select')} ${language.languageName}`}
 				onclick={() => setSelectedLanguage(language.languageIdentifier)}
 			>
 				<span>{language.languageFlag}</span>
@@ -113,15 +123,8 @@
 		border-color: var(--text-muted);
 	}
 
-	/* Seta do Dropdown */
 	.arrow-down {
-		border: solid var(--text-muted);
-		border-width: 0 2px 2px 0;
-		display: inline-block;
-		padding: 3px;
-		transform: rotate(45deg);
 		transition: transform 0.2s;
-		margin-left: 5px;
 	}
 
 	.dropdown-menu {
@@ -134,7 +137,7 @@
 		border: 1px solid var(--border-color);
 		min-width: 140px;
 		padding: 0.5rem 0;
-		z-index: 100;
+		z-index: var(--z-dropdown);
 		opacity: 0;
 		visibility: hidden;
 		transform: translateY(-10px);
@@ -149,7 +152,7 @@
 	}
 
 	.dropdown.open .arrow-down {
-		transform: rotate(-135deg); /* Seta aponta para cima */
+		transform: rotate(180deg); /* Seta aponta para cima - novo */
 	}
 
 	/* Itens do Menu */
