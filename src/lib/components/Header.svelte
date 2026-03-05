@@ -29,7 +29,7 @@
 	<button
 		class="hamburger-label"
 		class:menu-active={menuClicked}
-		aria-label={$_("header.hamburguerMenuLabel")}
+		aria-label={$_('header.hamburguerMenuLabel')}
 		onclick={() => (menuClicked = !menuClicked)}
 	>
 		<span></span>
@@ -40,8 +40,8 @@
 	<button
 		class:menu-active={menuClicked}
 		onclick={() => (menuClicked = !menuClicked)}
-		title={$_("header.overlayLabel")}
-		aria-label={$_("header.overlayLabel")}
+		title={$_('header.overlayLabel')}
+		aria-label={$_('header.overlayLabel')}
 		class="overlay"
 	></button>
 
@@ -134,13 +134,16 @@
 	.nav-mobile {
 		position: fixed;
 		top: 0;
-		right: -280px;
-		width: 280px;
+		right: 0;
+		width: 80%;
+		max-width: 300px;
+		min-width: 250px;
 		height: 100vh;
 		background: var(--bg-body);
-		padding: 5rem 1.5rem 1.5rem;
-		transition: right 0.3s ease;
+		padding: 4rem 1.5rem 1.5rem;
 		z-index: var(--z-nav-mobile);
+		transform: translateX(100%);
+		transition: transform 0.3s ease;
 	}
 
 	.nav-list {
@@ -232,7 +235,7 @@
        ESTADOS E MODIFICADORES
        ======================================== */
 	.menu-active.nav-mobile {
-		right: 0;
+		transform: translateX(0);
 	}
 
 	.menu-active.overlay {
@@ -255,6 +258,19 @@
 	/* ========================================
        MEDIA QUERIES
        ======================================== */
+	@media (max-width: 375px) {
+		.nav-mobile {
+			width: 90%;
+		}
+	}
+
+	@media (max-width: 320px) {
+		.nav-mobile {
+			width: 100%;
+			padding: 3.5rem 1rem 1rem;
+		}
+	}
+
 	@media (min-width: 768px) {
 		.nav-desktop {
 			display: flex;
