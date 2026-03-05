@@ -26,9 +26,11 @@
 	];
 
 	let {
-		mobileMode = false
+		mobileMode = false,
+		onLanguageChange
 	}: {
 		mobileMode?: boolean;
+		onLanguageChange?: () => void;
 	} = $props();
 
 	let currentLanguage = $derived(supportedLanguages.find((l) => l.languageIdentifier === $locale));
@@ -69,6 +71,8 @@
 			localStorage.setItem('preferredLang', languageId);
 		}
 
+		onLanguageChange?.();
+
 		toggleDropdown();
 	}
 </script>
@@ -101,7 +105,7 @@
 	</button>
 
 	<div class="dropdown-menu">
-		{#each supportedLanguages as language}
+		{#each supportedLanguages as language (language.languageIdentifier)}
 			<button
 				class="dropdown-item"
 				class:active={currentLanguage?.languageIdentifier === language.languageIdentifier}
@@ -144,8 +148,8 @@
 	}
 
 	.dropdown.open .arrow-down {
-    transform: rotate(180deg); /* Seta aponta para cima - novo */
-    }
+		transform: rotate(180deg); /* Seta aponta para cima - novo */
+	}
 
 	.btn-lang {
 		background: transparent;

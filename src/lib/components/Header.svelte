@@ -1,5 +1,6 @@
 <script>
 	import '../../app.css';
+	import { resolve } from '$app/paths';
 	import LanguageDropDown from './LanguageDropDown.svelte';
 	import { _ } from 'svelte-i18n';
 
@@ -23,7 +24,7 @@
 
 	<nav class="nav-desktop">
 		<LanguageDropDown />
-		<a href="/about">{$_('header.about')}</a>
+		<a href={resolve('/about')}>{$_('header.about')}</a>
 	</nav>
 
 	<button
@@ -48,11 +49,11 @@
 	<nav class="nav-mobile" class:menu-active={menuClicked}>
 		<ul class="nav-list">
 			<li class="nav-item">
-				<LanguageDropDown mobileMode={true} />
+				<LanguageDropDown mobileMode={true} onLanguageChange={() => menuClicked = false}/>
 			</li>
 
 			<li class="nav-item">
-				<a href="/about" onclick={() => (menuClicked = false)}>{$_('header.about')}</a>
+				<a href={resolve('/about')} onclick={() => (menuClicked = false)}>{$_('header.about')}</a>
 			</li>
 		</ul>
 	</nav>
