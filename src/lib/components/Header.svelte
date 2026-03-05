@@ -48,7 +48,7 @@
 	<nav class="nav-mobile" class:menu-active={menuClicked}>
 		<ul class="nav-list">
 			<li class="nav-item">
-				<LanguageDropDown />
+				<LanguageDropDown mobileMode={true} />
 			</li>
 
 			<li class="nav-item">

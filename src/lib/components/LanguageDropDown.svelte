@@ -25,6 +25,12 @@
 		}
 	];
 
+	let {
+		mobileMode = false
+	}: {
+		mobileMode?: boolean;
+	} = $props();
+
 	let currentLanguage = $derived(supportedLanguages.find((l) => l.languageIdentifier === $locale));
 	let currentFlag = $derived(currentLanguage?.languageFlag || '🇺🇸');
 
@@ -67,10 +73,21 @@
 	}
 </script>
 
-<div class="dropdown" class:open={isDropDownOpen} bind:this={dropdownElement}>
+<div
+	class="dropdown"
+	class:mobile-mode={mobileMode}
+	class:open={isDropDownOpen}
+	bind:this={dropdownElement}
+>
 	<button class="btn-lang" onclick={toggleDropdown}>
 		<span>{currentFlag}</span>
-		<span>{currentLanguage?.languageShortHand}</span>
+		<span>
+			{#if mobileMode}
+				{currentLanguage?.languageName}
+			{:else}
+				{currentLanguage?.languageShortHand}
+			{/if}
+		</span>
 		<svg class="arrow-down" width="12" height="12" viewBox="0 0 12 12">
 			<path
 				d="M2 4l4 4 4-4"
@@ -101,8 +118,34 @@
 <style>
 	.dropdown {
 		position: relative;
-		display: inline-block;
 	}
+
+	.dropdown.mobile-mode {
+		width: 100%;
+	}
+
+	.dropdown.mobile-mode .btn-lang {
+		width: 100%;
+		padding: 0.8rem 1rem;
+		font-size: 1rem;
+		justify-content: space-between;
+	}
+
+	.dropdown.mobile-mode .dropdown-menu {
+		position: relative;
+		width: 100%;
+		margin-top: 0.5rem;
+		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+	}
+
+	.dropdown.mobile-mode .dropdown-item {
+		padding: 1rem 1.2rem;
+		font-size: 1rem;
+	}
+
+	.dropdown.open .arrow-down {
+    transform: rotate(180deg); /* Seta aponta para cima - novo */
+    }
 
 	.btn-lang {
 		background: transparent;
@@ -138,21 +181,14 @@
 		min-width: 140px;
 		padding: 0.5rem 0;
 		z-index: var(--z-dropdown);
-		opacity: 0;
+		display: none;
 		visibility: hidden;
-		transform: translateY(-10px);
-		transition: all 0.2s ease;
 	}
 
 	/* Classe ativa para mostrar o menu */
 	.dropdown.open .dropdown-menu {
-		opacity: 1;
+		display: inline-block;
 		visibility: visible;
-		transform: translateY(0);
-	}
-
-	.dropdown.open .arrow-down {
-		transform: rotate(180deg); /* Seta aponta para cima - novo */
 	}
 
 	/* Itens do Menu */
