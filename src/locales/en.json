@@ -1,6 +1,8 @@
 {
 	"header": {
-		"about": "About"
+		"about": "About",
+		"hamburguerMenuLabel": "Open menu",
+		"overlayLabel": "Close menu"
 	},
 	"column": {
 		"backlog": "Backlog",
@@ -15,6 +17,10 @@
 		"design": "Design",
 		"research": "Research",
 		"setup": "Setup",
-		"deleteTask": "Delete Task"
+		"deleteTask": "Delete Task",
+		"newTaskTitle": "New Task"
+	},
+	"languageDropDown": {
+		"select": "Select"
 	}
 }

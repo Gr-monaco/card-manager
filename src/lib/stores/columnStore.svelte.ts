@@ -80,13 +80,13 @@ function saveToStorage(state: ColumnStoreState) {
 	}
 }
 
-function addCard(columnId: number): void {
+function addCard(columnId: number, cardTitle: string): void {
 	const targetColumn = findColumn(columnId);
 
 	const newCardData: CardData = {} as CardData;
 
 	newCardData.id = ++data.lastCardId;
-	newCardData.title = 'title';
+	newCardData.title = cardTitle;
 	newCardData.tag = 'feature';
 
 	targetColumn.cards.push(newCardData);
