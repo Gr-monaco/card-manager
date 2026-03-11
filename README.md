@@ -1,42 +1,77 @@
-# sv
+# Card Manager
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A Kanban Board application with drag and drop functionality for managing cards across multiple columns.
 
-## Creating a project
+## Motivation
 
-If you're seeing this, you've probably already done this step. Congrats!
+This is a portfolio project created to learn Svelte 5 and its new Runes system ($state, $props, $bindable).
 
-```sh
-# create a new project
-npx sv create my-app
+## Final Goal
+
+This project serves as a foundation for building a Markdown editor application using Tauri + Svelte.
+
+## Technologies
+
+- Svelte 5
+- TypeScript
+- Vite
+- svelte-dnd-action (drag and drop functionality)
+- svelte-i18n (internationalization)
+
+## Running Locally
+
+To run this project locally:
+
+1. Clone the repository
+2. Install dependencies:
+
+```bash
+npm install
 ```
 
-To recreate this project with the same configuration:
+3. Start the development server:
 
-```sh
-# recreate this project
-npx sv create --template minimal --types ts --add prettier eslint --install npm card-manager
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
+```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+The application will be available at http://localhost:5173
 
-To create a production version of your app:
+---
 
-```sh
-npm run build
+# Português 🇧🇷
+
+## Motivação
+
+Este é um projeto de portfólio criado para aprender Svelte 5 e seu novo sistema de Runes ($state, $props, $bindable).
+
+## Objetivo Final
+
+Este projeto serve como base para construir uma aplicação de editor Markdown usando Tauri + Svelte.
+
+## Tecnologias
+
+- Svelte 5
+- TypeScript
+- Vite
+- svelte-dnd-action (funcionalidade de arrastar e soltar)
+- svelte-i18n (internacionalização)
+
+## Executar Localmente
+
+Para executar este projeto localmente:
+
+1. Clone o repositório
+2. Instale as dependências:
+
+```bash
+npm install
 ```
 
-You can preview the production build with `npm run preview`.
+3. Inicie o servidor de desenvolvimento:
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+```bash
+npm run dev
+```
+
+A aplicação estará disponível em http://localhost:5173
