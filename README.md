@@ -36,3 +36,42 @@ npm run dev
 ```
 
 The application will be available at http://localhost:5173
+
+---
+
+# Português 🇧🇷
+
+## Motivação
+
+Este é um projeto de portfólio criado para aprender Svelte 5 e seu novo sistema de Runes ($state, $props, $bindable).
+
+## Objetivo Final
+
+Este projeto serve como base para construir uma aplicação de editor Markdown usando Tauri + Svelte.
+
+## Tecnologias
+
+- Svelte 5
+- TypeScript
+- Vite
+- svelte-dnd-action (funcionalidade de arrastar e soltar)
+- svelte-i18n (internacionalização)
+
+## Executar Localmente
+
+Para executar este projeto localmente:
+
+1. Clone o repositório
+2. Instale as dependências:
+
+```bash
+npm install
+```
+
+3. Inicie o servidor de desenvolvimento:
+
+```bash
+npm run dev
+```
+
+A aplicação estará disponível em http://localhost:5173
