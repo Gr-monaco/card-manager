@@ -8,7 +8,7 @@
 </script>
 
 <header>
-	<a href={resolve("/")} class="logo">
+	<a href={resolve('/')} class="logo">
 		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<rect width="24" height="24" rx="6" fill="#2563eb" />
 			<path
@@ -24,6 +24,7 @@
 
 	<nav class="nav-desktop">
 		<LanguageDropDown />
+		<a href={resolve('/')}>{$_('header.board')}</a>
 		<a href={resolve('/about')}>{$_('header.about')}</a>
 	</nav>
 
@@ -49,9 +50,12 @@
 	<nav class="nav-mobile" class:menu-active={menuClicked}>
 		<ul class="nav-list">
 			<li class="nav-item">
-				<LanguageDropDown mobileMode={true} onLanguageChange={() => menuClicked = false}/>
+				<LanguageDropDown mobileMode={true} onLanguageChange={() => (menuClicked = false)} />
 			</li>
 
+			<li class="nav-item">
+				<a href={resolve('/')} onclick={() => (menuClicked = false)}>{$_('header.board')}</a>
+			</li>
 			<li class="nav-item">
 				<a href={resolve('/about')} onclick={() => (menuClicked = false)}>{$_('header.about')}</a>
 			</li>

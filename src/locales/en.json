@@ -1,6 +1,7 @@
 {
 	"header": {
 		"about": "About",
+		"board": "Board",
 		"hamburguerMenuLabel": "Open menu",
 		"overlayLabel": "Close menu"
 	},
