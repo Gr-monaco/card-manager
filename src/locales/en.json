@@ -22,5 +22,18 @@
 	},
 	"languageDropDown": {
 		"select": "Select"
+	},
+	"aboutPage": {
+		"cardHero": {
+			"title": "CardManager",
+			"textIntro": "A kanban board to manage tasks.",
+			"textMain": "Born as a training ground to understand Svelte 5 and its Runes in practice — before moving on to the bigger goal: a desktop Markdown editor with Tauri + Rust."
+		},
+		"stack": {
+			"title": "Stack"
+		},
+		"dev": {
+			"title": "Developer"
+		}
 	}
 }
