@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import '../../app.css';
 	import { resolve } from '$app/paths';
 	import LanguageDropDown from './LanguageDropDown.svelte';
@@ -8,7 +8,7 @@
 </script>
 
 <header>
-	<div class="logo">
+	<a href={resolve("/")} class="logo">
 		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<rect width="24" height="24" rx="6" fill="#2563eb" />
 			<path
@@ -20,7 +20,7 @@
 			/>
 		</svg>
 		Card<span>Manager</span>
-	</div>
+	</a>
 
 	<nav class="nav-desktop">
 		<LanguageDropDown />
@@ -66,13 +66,17 @@
 	header {
 		background: white;
 		padding: 0 2rem;
-		height: 64px;
+		min-height: 64px;
 		border-bottom: 1px solid var(--border-color);
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		box-shadow: var(--shadow-sm);
 		z-index: var(--z-header);
+	}
+
+	a.logo {
+		text-decoration: none;
 	}
 
 	/* ========================================
