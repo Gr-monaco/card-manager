@@ -12,8 +12,10 @@ interface ColumnStoreState {
 let data = $state<ColumnStoreState>({
 	columns: [],
 	lastCardId: 0,
-	isLoading: true
+	isLoading: true,
 });
+
+let activeCardId = $state<number | null>(null);
 
 const defaultColumnsData = [
 	{
@@ -107,6 +109,8 @@ function handleDeleteCard(columnId: number, cardId: number) {
 
 	targetColumn.cards = targetColumn.cards.filter((c) => c.id !== cardId);
 
+	if (activeCardId === cardId) activeCardId = null;
+
 	saveToStorage(data);
 }
 
@@ -120,14 +124,20 @@ function findColumn(columnId: number): ColumnInfo {
 	return targetColumn;
 }
 
+function setActiveCard(cardId: number | null) : void {
+	activeCardId = cardId;
+}
+
 export const columnStore = {
 	get data() {
 		return data;
 	},
+	get activeCardId() {return activeCardId},
 
 	initializeStore,
 	addCard,
 	handleDropCard,
 	save: () => saveToStorage(data),
-	handleDeleteCard
+	handleDeleteCard,
+	setActiveCard
 };

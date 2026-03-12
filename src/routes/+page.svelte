@@ -3,6 +3,8 @@
 	import { columnStore } from '$lib/stores/columnStore.svelte';
 </script>
 
+<svelte:document onclick={() => columnStore.setActiveCard(null)} />
+
 <div class="board">
 	{#if columnStore.data.isLoading}
 		<div class="loading-container">
