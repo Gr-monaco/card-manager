@@ -1,12 +1,13 @@
 <script lang="ts">
 	import Column from '$lib/components/Column.svelte';
 	import { columnStore } from '$lib/stores/columnStore.svelte';
+	import { _ } from 'svelte-i18n';
 </script>
 
 <div class="board">
 	{#if columnStore.data.isLoading}
 		<div class="loading-container">
-			<span>Carregando...</span>
+			<span>{$_('board.loading')}</span>
 			<div class="spinner"></div>
 		</div>
 	{:else}
