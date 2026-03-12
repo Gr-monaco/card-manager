@@ -11,12 +11,12 @@ const config = {
 			assets: 'build',
 			fallback: '404.html',
 			prerender: {
-				default:true
+				default: true
 			}
 		}),
 		paths: {
-        	base: '/card-manager'
-    	}
+			base: '/card-manager'
+		}
 	}
 };
 
