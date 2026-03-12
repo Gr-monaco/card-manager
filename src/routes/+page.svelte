@@ -4,6 +4,8 @@
 	import { _ } from 'svelte-i18n';
 </script>
 
+<svelte:document onclick={() => columnStore.setActiveCard(null)} />
+
 <div class="board">
 	{#if columnStore.data.isLoading}
 		<div class="loading-container">

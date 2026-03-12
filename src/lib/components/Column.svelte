@@ -41,10 +41,25 @@
 </div>
 
 {#snippet card(cardInfo: CardData)}
-	<div class="card" data-card-id={cardInfo.id}>
+	<!-- svelte-ignore a11y_click_events_have_key_events -->
+	<!-- svelte-ignore a11y_no_static_element_interactions-->
+	<!-- O onclick é um enhancement para mobile: revela o btn-delete-card ao tocar no card.
+	     Usuários de teclado acessam o botão diretamente via Tab, sem precisar deste handler. -->
+	<div
+		class="card"
+		class:card-active={columnStore.activeCardId === cardInfo.id}
+		onclick={(e) => {
+			columnStore.setActiveCard(cardInfo.id);
+			e.stopPropagation();
+		}}
+		data-card-id={cardInfo.id}
+	>
 		<button
 			class="btn-delete-card"
-			onclick={() => columnStore.handleDeleteCard(columnInfo.id, cardInfo.id)}
+			onclick={(e) => {
+				columnStore.handleDeleteCard(columnInfo.id, cardInfo.id);
+				e.stopPropagation();
+			}}
 			title={$_('card.deleteTask')}
 		>
 			<svg
@@ -146,7 +161,8 @@
 		transition: opacity 0.2s;
 	}
 
-	.card:hover::after {
+	.card:hover::after,
+	.card-active::after {
 		opacity: 1;
 	}
 
@@ -221,6 +237,11 @@
 	}
 
 	.card:hover .btn-delete-card {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	.card-active .btn-delete-card {
 		opacity: 1;
 		transform: scale(1);
 	}
