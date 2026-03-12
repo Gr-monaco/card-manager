@@ -12,7 +12,7 @@ interface ColumnStoreState {
 let data = $state<ColumnStoreState>({
 	columns: [],
 	lastCardId: 0,
-	isLoading: true,
+	isLoading: true
 });
 
 let activeCardId = $state<number | null>(null);
@@ -82,11 +82,11 @@ function saveToStorage(state: ColumnStoreState) {
 function addCard(columnId: number, cardTitle: string): void {
 	const targetColumn = findColumn(columnId);
 
-	const newCardData: CardData = {} as CardData;
-
-	newCardData.id = ++data.lastCardId;
-	newCardData.title = cardTitle;
-	newCardData.tag = 'feature';
+	const newCardData: CardData = {
+		id: ++data.lastCardId,
+		title: cardTitle,
+		tag: 'feature'
+	};
 
 	targetColumn.cards.push(newCardData);
 
@@ -121,7 +121,7 @@ function findColumn(columnId: number): ColumnInfo {
 	return targetColumn;
 }
 
-function setActiveCard(cardId: number | null) : void {
+function setActiveCard(cardId: number | null): void {
 	activeCardId = cardId;
 }
 
@@ -129,7 +129,9 @@ export const columnStore = {
 	get data() {
 		return data;
 	},
-	get activeCardId() {return activeCardId},
+	get activeCardId() {
+		return activeCardId;
+	},
 
 	initializeStore,
 	addCard,
