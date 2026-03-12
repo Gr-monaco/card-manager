@@ -36,5 +36,8 @@
 		"dev": {
 			"title": "Developer"
 		}
+	},
+	"board": {
+		"loading": "Loading..."
 	}
 }
