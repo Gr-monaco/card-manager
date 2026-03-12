@@ -250,4 +250,11 @@
 		background-color: var(--danger);
 		color: white;
 	}
+
+	@media (max-width: 768px) {
+		.card-tag-select {
+			font-size: 0.8rem;
+			padding: 6px 10px;
+		}
+	}
 </style>
