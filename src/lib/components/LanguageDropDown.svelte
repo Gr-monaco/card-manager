@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { onDestroy, onMount } from 'svelte';
+	import { onDestroy } from 'svelte';
 	import { _, locale } from 'svelte-i18n';
 
 	interface Language {
@@ -56,12 +56,6 @@
 			}
 		}
 	}
-
-	onMount(() => {
-		if (browser) {
-			document.addEventListener('click', handleOutsideClick);
-		}
-	});
 
 	onDestroy(() => {
 		if (browser) {
