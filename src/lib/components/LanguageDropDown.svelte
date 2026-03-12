@@ -42,6 +42,11 @@
 
 	function toggleDropdown(): void {
 		isDropDownOpen = !isDropDownOpen;
+		if (isDropDownOpen) {
+			document.addEventListener('click', handleOutsideClick);
+		} else {
+			document.removeEventListener('click', handleOutsideClick);
+		}
 	}
 
 	function handleOutsideClick(event: MouseEvent) {
