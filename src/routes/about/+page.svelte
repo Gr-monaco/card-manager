@@ -150,13 +150,6 @@
 		background: var(--border-color);
 	}
 
-	.card {
-		background: var(--bg-column);
-		border-radius: var(--radius);
-		box-shadow: var(--shadow-md);
-		padding: 1.75rem 2rem;
-	}
-
 	.dev {
 		display: flex;
 		align-items: center;
