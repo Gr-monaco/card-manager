@@ -57,8 +57,8 @@
 	.spinner {
 		width: 40px;
 		height: 40px;
-		border: 4px solid #f3f3f3; /* Cor de fundo do spinner */
-		border-top: 4px solid #3498db; /* Cor da "barra" que gira */
+		border: 4px solid var(--border-color);
+		border-top-color: var(--primary);
 		border-radius: 50%;
 		animation: spin 1s linear infinite;
 	}
