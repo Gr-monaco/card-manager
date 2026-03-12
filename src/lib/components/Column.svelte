@@ -119,7 +119,7 @@
 	}
 
 	.col-count {
-		background: #f1f5f9;
+		background: var(--bg-body);
 		font-size: 0.7rem;
 		padding: 2px 8px;
 		border-radius: 999px;
