@@ -9,10 +9,7 @@ const config = {
 		adapter: adapter({
 			pages: 'build',
 			assets: 'build',
-			fallback: '404.html',
-			prerender: {
-				default: true
-			}
+			fallback: '404.html'
 		}),
 		paths: {
 			base: '/card-manager'
