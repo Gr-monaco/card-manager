@@ -47,9 +47,6 @@ const defaultColumnsData = [
 ];
 
 async function getData(): Promise<ColumnStoreState> {
-	//Fake timeout just to not flash a loading state
-	await new Promise((resolve) => setTimeout(resolve, 600));
-
 	if (typeof window !== 'undefined') {
 		const stored = localStorage.getItem(STORAGE_KEY);
 
