@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { asset } from '$app/paths';
 	import { _ } from 'svelte-i18n';
 </script>
 
@@ -25,7 +26,7 @@
 		<h2>{$_('aboutPage.dev.title')}</h2>
 		<div class="dev">
 			<div class="avatar">
-				<img src="/avatar.jpg" alt="Gabriel Monaco" />
+				<img src={asset('/avatar.jpg')} alt="Gabriel Monaco" />
 			</div>
 			<div>
 				<div class="dev-name">Gabriel Monaco</div>

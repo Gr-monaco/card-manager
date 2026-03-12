@@ -53,7 +53,7 @@
 		align-items: center;
 		min-height: 100vh;
 	}
-	
+
 	.loading-spinner {
 		width: 40px;
 		height: 40px;
@@ -62,8 +62,10 @@
 		border-radius: 50%;
 		animation: spin 0.8s linear infinite;
 	}
-	
+
 	@keyframes spin {
-		to { transform: rotate(360deg); }
+		to {
+			transform: rotate(360deg);
+		}
 	}
 </style>

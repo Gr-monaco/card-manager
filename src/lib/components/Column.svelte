@@ -33,7 +33,9 @@
 			{@render card(cardInfo)}
 		{/each}
 	</div>
-	<button class="btn-add-card" onclick={() => columnStore.addCard(columnInfo.id, $_("card.newTaskTitle"))}
+	<button
+		class="btn-add-card"
+		onclick={() => columnStore.addCard(columnInfo.id, $_('card.newTaskTitle'))}
 		><span>+</span> {$_('column.addTask')}
 	</button>
 </div>

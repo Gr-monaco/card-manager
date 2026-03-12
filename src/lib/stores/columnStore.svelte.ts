@@ -61,7 +61,7 @@ async function getData(): Promise<ColumnStoreState> {
 		}
 	}
 
-	return { columns: [], lastCardId: 0, isLoading: true };
+	return { columns: defaultColumnsData, lastCardId: 6, isLoading: false };
 }
 
 async function initializeStore() {
