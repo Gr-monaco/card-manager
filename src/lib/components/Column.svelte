@@ -7,13 +7,15 @@
 	import type { ColumnInfo } from '$lib/types/columnInfo';
 
 	interface Props {
-		columnInfo: ColumnInfo;
+		columnID: number;
 	}
 
-	let { columnInfo = $bindable() }: Props = $props();
+	let { columnID }: Props = $props();
+
+	let columnInfo: ColumnInfo = $derived(columnStore.data.columns.find((c) => c.id === columnID)!);
 
 	function handleDrop(e: CustomEvent<DndEvent<CardData>>) {
-		columnStore.handleDropCard(columnInfo.id, e.detail.items);
+		columnStore.handleDropCard(columnID, e.detail.items);
 	}
 </script>
 

@@ -13,8 +13,8 @@
 			<div class="spinner"></div>
 		</div>
 	{:else}
-		{#each columnStore.data.columns as columnInfo, i (columnInfo.id)}
-			<Column bind:columnInfo={columnStore.data.columns[i]}></Column>
+		{#each columnStore.data.columns as column (column.id)}
+			<Column columnID={column.id}></Column>
 		{/each}
 	{/if}
 </div>

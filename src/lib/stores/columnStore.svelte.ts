@@ -1,3 +1,4 @@
+import { browser } from '$app/environment';
 import type { CardData } from '$lib/types/cardData';
 import type { ColumnInfo } from '$lib/types/columnInfo';
 
@@ -17,7 +18,7 @@ let data = $state<ColumnStoreState>({
 
 let activeCardId = $state<number | null>(null);
 
-const defaultColumnsData = [
+const defaultColumnsData: ColumnInfo[] = [
 	{
 		id: 1,
 		title: 'column.backlog',
@@ -47,7 +48,7 @@ const defaultColumnsData = [
 ];
 
 async function getData(): Promise<ColumnStoreState> {
-	if (typeof window !== 'undefined') {
+	if (browser) {
 		const stored = localStorage.getItem(STORAGE_KEY);
 
 		if (stored) {
@@ -74,7 +75,7 @@ async function initializeStore() {
 }
 
 function saveToStorage(state: ColumnStoreState) {
-	if (typeof window !== 'undefined') {
+	if (browser) {
 		localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 	}
 }
