@@ -12,7 +12,7 @@
 
 	let { columnID }: Props = $props();
 
-	let columnInfo: ColumnInfo = $derived(columnStore.data.columns.find(c => c.id === columnID)!)
+	let columnInfo: ColumnInfo = $derived(columnStore.data.columns.find((c) => c.id === columnID)!);
 
 	function handleDrop(e: CustomEvent<DndEvent<CardData>>) {
 		columnStore.handleDropCard(columnID, e.detail.items);
