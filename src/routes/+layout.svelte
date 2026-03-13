@@ -3,14 +3,11 @@
 	import { browser } from '$app/environment';
 	import Header from '$lib/components/Header.svelte';
 	import { columnStore } from '$lib/stores/columnStore.svelte';
-	import { onMount } from 'svelte';
 	import { init, register, waitLocale } from 'svelte-i18n';
 
 	let { children } = $props();
 
-	onMount(() => {
-		columnStore.initializeStore();
-	});
+	columnStore.initializeStore();
 
 	register('en-US', () => import('../locales/en.json'));
 	register('pt-BR', () => import('../locales/ptbr.json'));
