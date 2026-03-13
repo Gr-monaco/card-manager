@@ -17,7 +17,7 @@ let data = $state<ColumnStoreState>({
 
 let activeCardId = $state<number | null>(null);
 
-const defaultColumnsData = [
+const defaultColumnsData: ColumnInfo[] = [
 	{
 		id: 1,
 		title: 'column.backlog',
