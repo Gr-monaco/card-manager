@@ -36,7 +36,9 @@
 	<button
 		class="btn-add-card"
 		onclick={() => columnStore.addCard(columnInfo.id, $_('card.newTaskTitle'))}
-		><span>+</span> {$_('column.addTask')}
+	>
+		<span>+</span>
+		{$_('column.addTask')}
 	</button>
 </div>
 
