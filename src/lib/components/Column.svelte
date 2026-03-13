@@ -146,6 +146,7 @@
 			transform 0.2s,
 			box-shadow 0.2s;
 		position: relative;
+		touch-action: none; /* IMPORTANTE PARA MOBILE */
 	}
 
 	/* Barrinha de status */
