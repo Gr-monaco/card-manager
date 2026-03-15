@@ -114,6 +114,7 @@
 		display: flex;
 		flex-direction: column;
 		scroll-snap-align: center;
+		scroll-snap-stop: always;
 	}
 
 	.column-header {
