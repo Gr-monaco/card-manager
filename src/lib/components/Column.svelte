@@ -181,7 +181,7 @@
 	}
 
 	.card-input-title {
-		width: 100%;
+		width: 90%;
 		border: 1px solid transparent;
 		background: transparent;
 		font-family: inherit;
@@ -233,8 +233,8 @@
 
 	.btn-delete-card {
 		position: absolute;
-		top: 4px;
-		right: 4px;
+		top: 8px;
+		right: 8px;
 		width: 24px;
 		height: 24px;
 		border-radius: 6px;
