@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { columnStore } from '$lib/stores/columnStore.svelte';
-	import { dndzone, type DndEvent } from 'svelte-dnd-action';
+	import { dragHandleZone, dragHandle, type DndEvent } from 'svelte-dnd-action';
 	import { _ } from 'svelte-i18n';
 
 	import type { CardData } from '$lib/types/cardData';
@@ -16,6 +16,7 @@
 
 	function handleDrop(e: CustomEvent<DndEvent<CardData>>) {
 		columnStore.handleDropCard(columnID, e.detail.items);
+		columnStore.setActiveCard(null); //This line was added to prevent the delete icon to persist during dragging in certain situations
 	}
 </script>
 
@@ -26,7 +27,7 @@
 	</div>
 	<div
 		class="cards-container"
-		use:dndzone={{ items: columnInfo.cards, flipDurationMs: 300, type: 'columns' }}
+		use:dragHandleZone={{ items: columnInfo.cards, flipDurationMs: 300, type: 'columns' }}
 		onconsider={handleDrop}
 		onfinalize={handleDrop}
 		data-column-id={columnInfo.id}
@@ -87,6 +88,17 @@
 			<option value="research">{$_('card.research')}</option>
 			<option value="setup">{$_('card.setup')}</option>
 		</select>
+
+		<div use:dragHandle class="drag-handle" aria-label="mover card" role="button" tabindex="0">
+			<svg width="40" height="40" viewBox="0 0 48 48" fill="currentColor">
+				<circle cx="9" cy="6" r="1.5" />
+				<circle cx="15" cy="6" r="1.5" />
+				<circle cx="9" cy="12" r="1.5" />
+				<circle cx="15" cy="12" r="1.5" />
+				<circle cx="9" cy="18" r="1.5" />
+				<circle cx="15" cy="18" r="1.5" />
+			</svg>
+		</div>
 	</div>
 {/snippet}
 
@@ -102,6 +114,7 @@
 		display: flex;
 		flex-direction: column;
 		scroll-snap-align: center;
+		scroll-snap-stop: always;
 	}
 
 	.column-header {
@@ -250,6 +263,32 @@
 	.btn-delete-card:hover {
 		background-color: var(--danger);
 		color: white;
+	}
+
+	.drag-handle {
+		position: absolute;
+		bottom: -2px;
+		right: 0;
+		color: var(--text-muted);
+		cursor: grab;
+		opacity: 0;
+		transition: opacity 0.2s;
+		touch-action: none;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		border-radius: 4px;
+	}
+
+	.card:hover .drag-handle,
+	.card-active .drag-handle {
+		opacity: 1;
+	}
+
+	.drag-handle:active {
+		cursor: grabbing;
 	}
 
 	@media (max-width: 768px) {
