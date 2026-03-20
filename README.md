@@ -2,6 +2,8 @@
 
 A Kanban Board application with drag and drop functionality for managing cards across multiple columns.
 
+[![Card Manager Demo](https://img.youtube.com/vi/1mo2f8-FHis/maxresdefault.jpg)](https://youtu.be/1mo2f8-FHis)
+
 ## Motivation
 
 This is a portfolio project created to learn Svelte 5 and its new Runes system ($state, $props, $bindable).
@@ -36,6 +38,10 @@ npm run dev
 ```
 
 The application will be available at http://localhost:5173
+
+## AI Assistance
+
+This project used AI (Claude by Anthropic) to assist with component styling, CSS design system, and code reviews. All logic, architecture decisions, and feature implementation were written by the developer.
 
 ---
 
@@ -75,3 +81,7 @@ npm run dev
 ```
 
 A aplicação estará disponível em http://localhost:5173
+
+## Uso de IA
+
+Este projeto utilizou IA (Claude da Anthropic) para auxiliar na estilização de componentes, design system CSS e code reviews. Toda a lógica, decisões de arquitetura e implementação de funcionalidades foram escritas pelo desenvolvedor.
