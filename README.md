@@ -2,7 +2,7 @@
 
 A Kanban Board application with drag and drop functionality for managing cards across multiple columns.
 
-[![Card Manager Demo](https://img.youtube.com/vi/1mo2f8-FHis/maxresdefault.jpg)](https://youtu.be/1mo2f8-FHis)
+[![Card Manager Demo](https://img.youtube.com/vi/omwyDrH0aoc/maxresdefault.jpg)](https://youtu.be/omwyDrH0aoc)
 
 ## Motivation
 
